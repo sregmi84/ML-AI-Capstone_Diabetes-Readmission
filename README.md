@@ -132,10 +132,20 @@ The model and technique provided in this study can be used as a preliminary appr
 
 The recommended logistic regression model isn't very robust yet. We used some feature engineering techniques with Grid Search CV to improve our model. It can be improved further and we have provided some methods we feel will help in future studies.
 
-## Further Recommendation
-One recommendation was to use Random Forest model to imrpove our test accuracy scores. Upon testing and tuning the Random Forest model using Grid Search CV, the result did not improve. In fact the, the test accuracy was 0.63, lower than that for the Logistic Regression model with c=100 and ridge (L2) penalty at 0.65.
+## Further Recommendations
 
-Another factor, we feel is worth exploring given a machine with better computation powers, is to include additional factors to the model. Specially including the individual prescribed medication field might have major impact on improving our model. As some drugs are key in diabetes management whereas others are less frequently used.
+### Random Forest
+One recommendation was to use Random Forest model to see if it improves test accuracy scores. Upon testing and tuning the Random Forest model using Grid Search CV, the result did not improve. In fact the, the test accuracy was 0.63, lower than that for the Logistic Regression model with c=100 and ridge (L2) penalty at 0.65. 
+
+![Best Random Forest](/Capstone/images/best_random_forest.jpg)
+
+Also, explored feature importance for this best random forest model.
+![Best Random Forest Feature Importance](/Capstone/images/random_forest_features.jpg)
+
+### Other Recommendations
+Another factor, we feel is worth exploring given a machine with better computation powers, is to include additional factors to the model. Specially including the individual prescribed medication fields might have major impact on improving our model. As some drugs are key in diabetes management whereas others are less frequently used.
+
+Gradient Boost might be worth considering too in future studies.
 
 Also, it would nice to have socio-economic data such as income which determines eating/exercise habits or access to better resources and healthcare services.
 
