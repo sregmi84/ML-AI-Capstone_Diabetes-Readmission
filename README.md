@@ -42,15 +42,32 @@ In the process of our model design, we classify output into two classes (0 no re
 - readmitted Days to inpatient readmission. Values: “2” if the patient was readmitted in less than 30 days, “1” if the patient was readmitted in more than 30 days, and “0” for no record of readmission.
 
 ## Data Exploration
-The n/a(NAN) values in the dataset are identified by "?". The data contains missing values and those are filled with the most frequent values obtained by using the mode() function.
+
+### Distributions
+
+![Distribution by Gender](/Capstone/images/dist_gender.jpg)
+![Distribution by Age](/Capstone/images/dist_age.jpg)
+
+### Correlation
+We examined correaltion betweeen numeric fields including encoded categorical ones. We found that there aren't very highly correalted features in the data.
+
+![Correaltion](/Capstone/images/corr.jpg)
 
 ## Data Cleanup
-We dropped columns that had close to 50% missing data ('weight', 'payer_code', 'medical_specialty'). Also dropped encounter id and patient number. We also excluded individual medication prescribed field and used the overall diabetesMed field. This was also done to imrpove performance because of processing capacity limitations of the machine we are using. We also dropped the 3 diagnoses fields but retained the number of diagnoses field.
+The data contains missing values and those are filled with the most frequent values obtained by using the mode() function. We dropped columns that had close to 50% missing data ('weight', 'payer_code', 'medical_specialty'). Also dropped encounter id and patient number. We also excluded individual medication prescribed field and used the overall diabetesMed field. This was also done to improve performance because of processing capacity limitations of the machine we are using. We also dropped the 3 diagnoses fields but retained the number of diagnoses field.
 
 In the process of our model design, we classify output into two classes (0 no readmission and 1 means readmitted) instead of the three that appear in the raw data. The output class is balanced.
 
+### Check Output Class balance
+
+![Class Balance](/Capstone/images/class_balance.jpg)
+
+### Redefine Output Class balance
+
+![Redefine Balance](/Capstone/images/redefine_class.jpg)
+
 ## Plots
-Plots are not saved separately in this repository because of file size.
+Plots are not saved separately in this repository because of file size. But we have saved some screenshots that are used in this report. They can be found in the folder:  Capstone/images
 
 ## Script to run the code
 Script can be found under Capstone/Capstone - Diabetes Readmission.ipynb
