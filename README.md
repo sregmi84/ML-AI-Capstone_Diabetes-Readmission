@@ -1,5 +1,5 @@
 # ML-AI-Capstone_Diabetes-Readmission
-Classification to predict hospital readmission of patients with diabetes using pateint encounter data
+Hospitals are constantly looking for ways to minimize costs and provide better patient care. Hospital stays require significant resources and can mean added burden on hospitals, medical providers and patients alike. In this study, we find a way to identify diabetic patients who are likely to be readmitted based on their past utilization data using various classification techniques (Logistic Regression, Decision Tree, KNN Classifier and Support Vector). The result would allow hospitals to plan and manage resource allocation accordingly. It would also enable the hospitals to build early intervention programs for some of the patients identified as likely to be readmitted. This would prevent readmission and save costs for the hospital and patients alike.
 
 ## Data
 Data comes from UCI ML Repository. It can found under Capstone/Data/diabetic_data.csv
@@ -41,10 +41,13 @@ In the process of our model design, we classify output into two classes (0 no re
 - diabetesMed Indicates if there was any diabetic medication prescribed. Values: “yes” and “no”
 - readmitted Days to inpatient readmission. Values: “2” if the patient was readmitted in less than 30 days, “1” if the patient was readmitted in more than 30 days, and “0” for no record of readmission.
 
-## Data Cleanup
-We dropped columns that had close to 50% missing data ('weight', 'payer_code', 'medical_specialty'). Also dropped encounter id and patient number. We also excluded individual medication prescribed field and used the overall diabetesMed field. This was also done to imrpove performance because of processing limitations of the machine. We also dropped the 3 diagnoses fields but retained the number of diagnoses field.
+## Data Exploration
+The n/a(NAN) values in the dataset are identified by "?". The data contains missing values and those are filled with the most frequent values obtained by using the mode() function.
 
-In the process of our model design, we classify output into two classes (0 no readmission and 1 means readmitted). The output class is balanced.
+## Data Cleanup
+We dropped columns that had close to 50% missing data ('weight', 'payer_code', 'medical_specialty'). Also dropped encounter id and patient number. We also excluded individual medication prescribed field and used the overall diabetesMed field. This was also done to imrpove performance because of processing capacity limitations of the machine we are using. We also dropped the 3 diagnoses fields but retained the number of diagnoses field.
+
+In the process of our model design, we classify output into two classes (0 no readmission and 1 means readmitted) instead of the three that appear in the raw data. The output class is balanced.
 
 ## Plots
 Plots are not saved separately in this repository because of file size.
@@ -55,11 +58,21 @@ Script can be found under Capstone/Capstone - Diabetes Readmission.ipynb
 ## Model
 Models tested are limited to the ones learned so far in the program. Current models come from Sci-kit learn package. Future enhancement using more advanced models (such as RandomForest, XGBoost etc.) recommended. If run in better machine with resource capability, the SVM can also be tuned using Grid Search CV (not done here)
 
-We used the dummy classifier with most frequent strategy as the baseline model. All fields were converted to numeric during cleanup and no furtehr encoding was required. We used Standard Scaling transformation before running our classification models.
+We used the dummy classifier with most frequent strategy as the baseline model. All fields were converted to numeric during cleanup and no further encoding was required. We used Standard Scaling transformation before running our classification models.
 Then compared Logistic Regression, Decision Tree, KNN Classisifier and Support Vector models. We used permutation importance to identify important features and Grid Search CV to fine tune the models. We used roc_auc scoring as the output class is balanced.
 
 ## Finding based on model evaluation and validation
 Using roc_auc score in Grid Search CV we found the logistic regression with c=100 and ridge (L2) penalty to be the best model in terms of both test accuracy(0.65) and time. Since it is Logistic Regression, we can also get the probablity that a patient will likely fall into one of the two output classes.
+
+## Conclusion
+The model and technique provided in this study can be used as a preliminary approach by hospitals to predict future hospital readmission. The model can be scaled to incoporate additional chronic diagnoses that cause frequent inpatient visits but can also be managed without hospital stays. For example, a similar study and model can be built using the same framework to identify chances of readmission i npatients admitted to the hospital with heart diseases. The model can further be expanded to include additional hospitals.
+
+The recommended logistic regression model isn't very robust yet. We used some feature engineering techniques with Grid Search CV to imrpove our model. It can be improved further and we have provided some methods we feel will help in future studies.
+
+## Further Recommendation
+One recommendation was to use Random Forest model to imrpove our test accuracy scores. Upon testing and tuning the Random Forest model using Grid Search CV, the result did not improve. In fact the, the test accuracy was 0.63, lower than that for the Logistic Regression model with c=100 and ridge (L2) penalty at 0.65.
+
+Another factor, we feel is worth exploring given a machine with better computation powers, is to include additional factors to the model. Specially including the individual prescribed medication field might have major impact on improving our model. As some drugs are key in diabetes management whereas others are less frequently used.
 
 Also, it would nice to have socio-economic data such as income which determines eating/exercise habits or access to better resources and healthcare services.
 
