@@ -1,5 +1,5 @@
 # ML-AI-Capstone_Diabetes-Readmission
-Hospitals are constantly looking for ways to minimize costs and provide better patient care. Hospital stays require significant resources and can mean added burden on hospitals, medical providers and patients alike. In this study, we find a way to identify diabetic patients who are likely to be readmitted based on their past utilization data using various classification techniques (Logistic Regression, Decision Tree, KNN Classifier and Support Vector). The result would allow hospitals to plan and manage resource allocation accordingly. It would also enable the hospitals to build early intervention programs for some of the patients identified as likely to be readmitted. This would prevent readmission and save costs for the hospital and patients alike.
+Hospitals are constantly looking for ways to minimize costs and provide better patient care. Hospital stays require significant resources and it means added burden on hospitals, medical providers and patients alike. In this study, we find a way to identify diabetic patients who are likely to be readmitted based on their past utilization data using various classification techniques (Logistic Regression, Decision Tree, KNN Classifier and Support Vector). The result would allow hospitals to plan and manage resource allocation accordingly. It would also enable the hospitals to build early intervention programs for some of the patients identified as likely to be readmitted. This would prevent readmission and save costs for the hospital and patients alike.
 
 ## Data
 Data comes from UCI ML Repository. It can found under Capstone/Data/diabetic_data.csv
@@ -72,19 +72,65 @@ Plots are not saved separately in this repository because of file size. But we h
 ## Script to run the code
 Script can be found under Capstone/Capstone - Diabetes Readmission.ipynb
 
-## Model
+## Methodology (Model and Feature Selection)
 Models tested are limited to the ones learned so far in the program. Current models come from Sci-kit learn package. Future enhancement using more advanced models (such as RandomForest, XGBoost etc.) recommended. If run in better machine with resource capability, the SVM can also be tuned using Grid Search CV (not done here)
 
 We used the dummy classifier with most frequent strategy as the baseline model. All fields were converted to numeric during cleanup and no further encoding was required. We used Standard Scaling transformation before running our classification models.
-Then compared Logistic Regression, Decision Tree, KNN Classisifier and Support Vector models. We used permutation importance to identify important features and Grid Search CV to fine tune the models. We used roc_auc scoring as the output class is balanced.
+
+### Simple Models (Logistic Regression, Decision Tree, KNN Classisifier and Support Vector models)
+Then compared Logistic Regression, Decision Tree, KNN Classisifier and Support Vector models against the baseline dummy model and with each other.
+
+Here is an example of one of the simple models (simple logistic regression with default parameters):
+![Basic Logistic Regression](/Capstone/images/base_log_reg.jpg)
+
+See comparision of results across the simple models, their ROC curves and confusion matrices.
+
+**Results**
+![Basic Model Results](/Capstone/images/base_models_results.jpg)
+
+**ROC Curves**
+![Basic Model ROC Curves](/Capstone/images/base_models_ROC_Curves.jpg)
+
+**Confusion Matrices**
+![Basic Model Confusion Matrices](/Capstone/images/base_models_Conf_Matrices.jpg)
+
+#### Feature Importance
+We used permutation importance to identify important features from the logistic regression model.
+![Permutation Importance Logistic Regression](/Capstone/images/perm_imp_base_Log_reg.jpg)
+
+Next we examined the impact of removing the least important feaatures
+![Remove Least Important Features Logistic Regression](/Capstone/images/remove_less_imp_features_base_log_reg.jpg)
+We retain all features for this the rest of this analysis.
+
+Grid Search CV was used to fine tune the models. We used roc_auc scoring as the output class is balanced.
+
+Here is an example of one of the models using Grid Search CV (Decision Tree):
+![Grid Search Decision Tree](/Capstone/images/grid_cv_dcsn_tree.jpg)
+
+**Results from Grid Search**
+![Grid Search Model Results](/Capstone/images/grid_cv_best_models_results.jpg)
+
+We plot the Precision-Recall curves, ROC curves and Confusion matrices for the logistic regression, decision tree and KNN classifier with the best parameters obtained from the Grid Search CV
+
+**Precision Recall Curves - Grid Search**
+![Grid Search Precision Recall Curves](/Capstone/images/best_Prec_Rec_Curves.jpg)
+
+**ROC Curves - Grid Search**
+![Grid Search ROC Curves](/Capstone/images/best_ROC_Curves.jpg)
+
+**Confusion Matrices - Grid Search**
+![Grid Search Confusion Matrices](/Capstone/images/best_Conf_Matrices.jpg)
 
 ## Finding based on model evaluation and validation
 Using roc_auc score in Grid Search CV we found the logistic regression with c=100 and ridge (L2) penalty to be the best model in terms of both test accuracy(0.65) and time. Since it is Logistic Regression, we can also get the probablity that a patient will likely fall into one of the two output classes.
 
-## Conclusion
-The model and technique provided in this study can be used as a preliminary approach by hospitals to predict future hospital readmission. The model can be scaled to incoporate additional chronic diagnoses that cause frequent inpatient visits but can also be managed without hospital stays. For example, a similar study and model can be built using the same framework to identify chances of readmission i npatients admitted to the hospital with heart diseases. The model can further be expanded to include additional hospitals.
+**Recommended Logistic Regression Model**
+![Best Logistic Regression](/Capstone/images/best_log_reg.jpg)
 
-The recommended logistic regression model isn't very robust yet. We used some feature engineering techniques with Grid Search CV to imrpove our model. It can be improved further and we have provided some methods we feel will help in future studies.
+## Conclusion
+The model and technique provided in this study can be used as a preliminary approach by hospitals to predict future hospital readmission. The model can be scaled to incoporate additional chronic diagnoses that cause frequent inpatient visits but can also be managed without hospital stays. For example, a similar study and model can be built using the same framework to identify chances of readmission in patients admitted to the hospital with heart diseases. The model can further be expanded to include additional hospitals.
+
+The recommended logistic regression model isn't very robust yet. We used some feature engineering techniques with Grid Search CV to improve our model. It can be improved further and we have provided some methods we feel will help in future studies.
 
 ## Further Recommendation
 One recommendation was to use Random Forest model to imrpove our test accuracy scores. Upon testing and tuning the Random Forest model using Grid Search CV, the result did not improve. In fact the, the test accuracy was 0.63, lower than that for the Logistic Regression model with c=100 and ridge (L2) penalty at 0.65.
