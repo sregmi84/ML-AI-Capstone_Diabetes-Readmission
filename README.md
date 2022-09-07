@@ -100,6 +100,7 @@ We used permutation importance to identify important features from the logistic 
 
 Next we examined the impact of removing the least important feaatures
 ![Remove Least Important Features Logistic Regression](/Capstone/images/remove_less_imp_features_base_log_reg.jpg)
+
 We retain all features for this the rest of this analysis.
 
 Grid Search CV was used to fine tune the models. We used roc_auc scoring as the output class is balanced.
