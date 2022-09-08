@@ -85,13 +85,13 @@ Here is an example of one of the simple models (simple logistic regression with 
 
 See comparision of results across the simple models, their ROC curves and confusion matrices.
 
-**Results**
+**Results**  
 ![Basic Model Results](/Capstone/images/base_models_results.jpg)
 
-**ROC Curves**
+**ROC Curves**  
 ![Basic Model ROC Curves](/Capstone/images/base_models_ROC_Curves.jpg)
 
-**Confusion Matrices**
+**Confusion Matrices**  
 ![Basic Model Confusion Matrices](/Capstone/images/base_models_Conf_Matrices.jpg)
 
 #### Feature Importance
@@ -108,7 +108,7 @@ Grid Search CV was used to fine tune the models. We used roc_auc scoring as the 
 Here is an example of one of the models using Grid Search CV (Decision Tree):
 ![Grid Search Decision Tree](/Capstone/images/grid_cv_dcsn_tree.jpg)
 
-**Results from Grid Search**
+**Results from Grid Search**  
 ![Grid Search Model Results](/Capstone/images/grid_cv_best_models_results.jpg)
 
 We plot the Precision-Recall curves, ROC curves and Confusion matrices for the logistic regression, decision tree and KNN classifier with the best parameters obtained from the Grid Search CV
@@ -119,7 +119,7 @@ We plot the Precision-Recall curves, ROC curves and Confusion matrices for the l
 **ROC Curves - Grid Search**
 ![Grid Search ROC Curves](/Capstone/images/best_ROC_Curves.jpg)
 
-**Confusion Matrices - Grid Search**
+**Confusion Matrices - Grid Search**  
 ![Grid Search Confusion Matrices](/Capstone/images/best_Conf_Matrices.jpg)
 
 ## Finding based on model evaluation and validation
